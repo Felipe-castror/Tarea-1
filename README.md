@@ -12,7 +12,7 @@ si se ingresa un dato que no este en las condiciones o que se considere no apto,
 - Registrar clientes con su nombre, problema y prioridad (Alta, Media o Baja) y hora de registro.
 - Mostrar la lista de espera de clientes por prioridad.
 - Atender al cliente con la prioridad más alta, ordenandolos por este orden: prioridad - fecha y hora(menor tiempo == el primero).** (aun en desarrollo)
-- Guardar y cargar los datos desde archivos.
+- Guardar y cargar los datos desde archivos.** (aun en desarrollo)
 - Menú interactivo por consola.** (aun en desarrollo).
 
 ---
@@ -22,13 +22,13 @@ si se ingresa un dato que no este en las condiciones o que se considere no apto,
 - Guardado y carga desde archivo puede tener errores si los datos contienen caracteres especiales.
 - Validaciones en los campos del cliente aún no son exhaustivas y pueden tener problemas a la hora de probar.
 - En ciertos casos, `list_find` puede retornar NULL y no está bien manejado en todas las funciones.
-
+- no se puede probar casos para comprobar las funciones.
 ---
 
 ## 🧪 Ejemplo de uso
 
 ```bash
-$ ./soporte
+$ ./soporte** aun en desarrollo
 Bienvenido al sistema de soporte técnico
 1. Registrar nuevo cliente
 2. Mostrar lista de espera

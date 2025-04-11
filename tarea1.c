@@ -55,6 +55,7 @@ void C_Ticket(List *clientes) //funcion para crear los tickets que tengan a los 
     return;
   }
   //ahora se registra al cliente accediendo directamente al struct y en la posicion del id, para guardarlo directamente sin uso de un aux
+  while()
   printf("Registrar nuevo cliente\n");
   printf("\nIngrese id :");
   scanf("%d", &estructura ->id);
@@ -63,7 +64,7 @@ void C_Ticket(List *clientes) //funcion para crear los tickets que tengan a los 
 
   if  (estructura ->id < 1 || estructura -> id > 999999)
   {  
-    printf("ERROR , NO SE INGRESO UN ID VALIDO");
+    printf("ERROR , NO SE INGRESO UN ID VALIDO\n");
     return;
   }
 
@@ -72,6 +73,8 @@ void C_Ticket(List *clientes) //funcion para crear los tickets que tengan a los 
   int id_busc = estructura -> id;
 
   Ticket *resultado = (Ticket *)list_find(clientes, compararID, &id_busc);
+
+
 
   if (resultado == NULL) 
   {
@@ -115,7 +118,7 @@ void C_Ticket(List *clientes) //funcion para crear los tickets que tengan a los 
 
   else 
   {
-    printf("TICKET NO VALIDO, ID YA FUE INGRESADO ANTES");
+    printf("TICKET NO VALIDO, ID YA FUE INGRESADO ANTES\n");
     return;
   }
 }
@@ -149,7 +152,7 @@ void prioridad_Ticket(List*clientes, List *clientes_B , List *clientes_M , List 
 
   if (estructura == NULL) 
   {
-    printf("NO SE ENCONTRO TICKET CON EL ID.\n");
+    printf("\nNO SE ENCONTRO TICKET CON EL ID.\n");
     return; 
   }
 
@@ -158,7 +161,7 @@ void prioridad_Ticket(List*clientes, List *clientes_B , List *clientes_M , List 
   // viendo si la prioridad es valida
   if (N_prioridad < 1 || N_prioridad > 3)
   {
-    printf("ERROR , SE INGRESO UNA PRIORIDAD NO VALIDA \n");
+    printf("\nERROR , SE INGRESO UNA PRIORIDAD NO VALIDA \n");
     return;
   }
   //se hace cambio la prioridad del ticket una vez ya todo fue confirmado
@@ -177,11 +180,11 @@ void prioridad_Ticket(List*clientes, List *clientes_B , List *clientes_M , List 
         list_sortedInsert(clientes_A, estructura, compararPorHora);
         break;
     default:
-        printf("Prioridad no válida\n");
+        printf("\nPrioridad no válida\n");
         break;
 }
 
-  printf("Prioridad del ticket de id %d fue modificada a %d con exito", estructura -> id , estructura -> prioridad);
+  printf("Prioridad del ticket de id %d fue modificada a %d con exito\n", estructura -> id , estructura -> prioridad);
 
 }
 
@@ -249,7 +252,8 @@ int main() {
     scanf(" %c", &opcion); // Nota el espacio antes de %c para consumir el
                            // newline anterior
 
-    switch (opcion) {
+    switch (opcion) 
+    {
     case '1':
       C_Ticket(clientes);
       break;
