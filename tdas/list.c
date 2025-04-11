@@ -11,7 +11,7 @@ struct List {
   Node *head;
   Node *tail;
   Node *current;
-  int size;
+  int size;  
 };
 
 typedef List List;
@@ -155,6 +155,19 @@ void *list_popBack(List *L) {
   L->tail = current;
   L->size--;
   return data;
+}
+
+void *list_find(List *L, int (*cmp)(void *, void *), void *dato) {
+  void *elemento = list_first(L);
+
+  while (elemento != NULL) {
+      if (cmp(elemento, dato)) {
+          return elemento;  // se encontro el dato luego de comprobar 
+      }
+      elemento = list_next(L);
+  }
+
+  return NULL;  // no se encontró el dato, se retorna vacio
 }
 
 int list_size(List *L){
