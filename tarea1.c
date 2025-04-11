@@ -196,17 +196,37 @@ void mostrar_lista_clientes(List *clientes, List *clientes_B, List *clientes_M ,
     printf("No hay clientes en espera\n");
     return;
   }
+
   
   printf("clientes en espera: %d\n", Nclientes);
   printf("-------------------------------------\n");
 
-  clientes_B -> current = clientes_B->head;
+  Ticket *t;
 
-  while(currentA != NULL)
+  printf("\n--- PRIORIDAD ALTA ---\n");
+  t = (Ticket *)list_first(clientes_A);
+  while (t != NULL) 
   {
-
+    printf("ID: %d | Problema: %s\n", t->id, t->problema);
+    t = (Ticket *)list_next(clientes_A);
   }
 
+  
+  printf("\n--- PRIORIDAD MEDIA ---\n");
+  t = (Ticket *)list_first(clientes_M);
+  while (t != NULL) 
+  {
+    printf("ID: %d | Problema: %s\n", t->id, t->problema);
+    t = (Ticket *)list_next(clientes_M);
+  }
+
+  printf("\n--- PRIORIDAD BAJA ---\n");
+  t = (Ticket *)list_first(clientes_B);
+  while (t != NULL) 
+  {
+    printf("ID: %d | Problema: %s\n", t->id, t->problema);
+    t = (Ticket *)list_next(clientes_B);
+  }
 
 
   
@@ -231,7 +251,7 @@ int main() {
 
     switch (opcion) {
     case '1':
-      registrar_clientes(clientes);
+      C_Ticket(clientes);
       break;
     case '2':
       // Lógica para asignar prioridad

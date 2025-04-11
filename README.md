@@ -1,33 +1,42 @@
-En este *repl* puedes encontrar varios ejemplos que te pueden ayudar con las tareas de estructura.
+ 🛠️ Sistema de Soporte Técnico - Tarea 1
 
-## Código de Ejemplo (tarea1)
-Para ejecutar el ejemplo tarea1 primero debemos compilar (en la carpeta raíz)
-````
-gcc tdas/*.c tarea1.c -Wno-unused-result -o tarea1
-````
+Este programa implementa un sistema de gestión de tickets para soporte técnico, permitiendo registrar clientes, asignar prioridades, listar y atender solicitudes de acuerdo a su prioridad, fecha y hora.
 
-Y luego ejecutar:
-````
-./tarea1
-````
+Este proyecto utiliza una lista enlazada genérica implementada en C para gestionar la fila de espera de tickets.
 
-## TDAs
-En la carpeta `tdas` se encuentran implementados distintos TDAs que puedes utilizar (lista, pila, cola, cola con prioridad y mapas). 
+IMPORTANTE:
+si se ingresa un dato que no este en las condiciones o que se considere no apto, ejm: caracteres especiales, numero negativos en id, y y prioridades mayores a 3 o menores a 1, el programa para de registrar y pasa a la siguiente función
 
-Las implementaciones no son las más eficientes (todas usan como estructura de datos una **lista enlazada**), por lo que puedes reemplazarlas por las que has realizado en los labs.
+## ✅ Funcionalidades principales
 
-## Otros códigos (en carpeta examples)
-Para ejecutar los distintos ejemplos que hay en la carpeta `examples`, primero debes compilarlos. Si estamos en la carpeta raíz:
-````
-gcc tdas/*.c examples/example2_menu.c -Wno-unused-result -o example
-````
-Y luego ejecutarlos:
-````
-./example
-````
+- Registrar clientes con su nombre, problema y prioridad (Alta, Media o Baja) y hora de registro.
+- Mostrar la lista de espera de clientes por prioridad.
+- Atender al cliente con la prioridad más alta, ordenandolos por este orden: prioridad - fecha y hora(menor tiempo == el primero).** (aun en desarrollo)
+- Guardar y cargar los datos desde archivos.
+- Menú interactivo por consola.** (aun en desarrollo).
 
-Se incluyen los siguientes ejemplos:
-* `example1_list`: Uso del TDA Lista, inserción y eliminación de elementos.
-* `example2_menu`: Ejemplo de menú con submenús.
-* `example3_readcsv`: Ejemplo de lectura desde un archivo csv y almacenamiento en datos estructurados.
-* `example4_map`: Ejemplo de uso del TDA mapa.
+---
+
+## ⚠️ Funciones con problemas conocidos
+
+- Guardado y carga desde archivo puede tener errores si los datos contienen caracteres especiales.
+- Validaciones en los campos del cliente aún no son exhaustivas y pueden tener problemas a la hora de probar.
+- En ciertos casos, `list_find` puede retornar NULL y no está bien manejado en todas las funciones.
+
+---
+
+## 🧪 Ejemplo de uso
+
+```bash
+$ ./soporte
+Bienvenido al sistema de soporte técnico
+1. Registrar nuevo cliente
+2. Mostrar lista de espera
+3. Atender siguiente cliente
+4. Guardar y salir
+
+Ingrese una opción: 1
+Nombre del cliente: Juan Pérez
+Problema: Pantalla azul
+Prioridad (Alta, Media, Baja): Alta
+Cliente registrado con éxito.
