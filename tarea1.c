@@ -11,7 +11,7 @@ typedef struct
   int id;
   char problema[MAX_P];
   int prioridad;
-  time_t tiempo
+  time_t tiempo;
 }Ticket;
 
 
@@ -145,7 +145,7 @@ void prioridad_Ticket(List*clientes, List *clientes_B , List *clientes_M , List 
 
 
   //Se busca un puntero con la posicion del id si es que se encontro , en tal caso de que no se termina la funcion
-  estructura = (Ticket *)list_find(clientes, &id_A_Buscar, compararID);
+  estructura = (Ticket *)list_find(clientes, compararID, &id_A_Buscar);
 
   if (estructura == NULL) 
   {
@@ -254,7 +254,7 @@ int main() {
       C_Ticket(clientes);
       break;
     case '2':
-      // Lógica para asignar prioridad
+      prioridad_Ticket(clientes, clientes_B ,clientes_M , clientes_A);
       break;
     case '3':
       mostrar_lista_clientes(clientes, clientes_B , clientes_M , clientes_A);
@@ -266,7 +266,7 @@ int main() {
       // Lógica para mostrar clientes por prioridad
       break;
     case '6':
-      puts("Saliendo del sistema de gestión hospitalaria...");
+      puts("Saliendo del sistema de soporte tecnico...");
       break;
     default:
       puts("Opción no válida. Por favor, intente de nuevo.");
@@ -277,6 +277,10 @@ int main() {
 
   // Liberar recursos, si es necesario
   list_clean(clientes);
+  list_clean(clientes_B);
+  list_clean(clientes_M);
+  list_clean(clientes_A);
+  
 
   return 0;
 }
