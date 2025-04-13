@@ -55,7 +55,6 @@ void C_Ticket(List *clientes) //funcion para crear los tickets que tengan a los 
     return;
   }
   //ahora se registra al cliente accediendo directamente al struct y en la posicion del id, para guardarlo directamente sin uso de un aux
-  while()
   printf("Registrar nuevo cliente\n");
   printf("\nIngrese id :");
   scanf("%d", &estructura ->id);
@@ -166,6 +165,10 @@ void prioridad_Ticket(List*clientes, List *clientes_B , List *clientes_M , List 
   }
   //se hace cambio la prioridad del ticket una vez ya todo fue confirmado
   estructura -> prioridad = N_prioridad;
+
+  list_remove(clientes_B, estructura);
+  list_remove(clientes_M, estructura);
+  list_remove(clientes_A, estructura);
 
   // ahora se ingresa el ticket en la lista correspondiente, segun su prioridad y hora
   switch (estructura->prioridad) 
