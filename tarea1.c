@@ -38,6 +38,8 @@ int compararID(void *estructura , void *num)
   Ticket *t = (Ticket *)estructura;
   int compID = *((int*)num);
 
+  printf("%d" , &compID);
+
   if (t->id == compID)return 1;
 
   else return 0; 
