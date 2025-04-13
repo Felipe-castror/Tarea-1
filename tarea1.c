@@ -40,6 +40,7 @@ Ticket *buscarID(List*lista, int id)
   Ticket * ticket = (Ticket*)list_first(lista);
   while (ticket != NULL)
   {
+    printf("Revisando ticket con ID: %d\n", ticket->id);
     if (ticket -> id == id )return ticket;
     ticket = (Ticket *)list_next(lista);
   }

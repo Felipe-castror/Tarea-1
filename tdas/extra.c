@@ -83,11 +83,7 @@ List *split_string(const char *str, const char *delim) {
 
 // Función para limpiar la pantalla
 void limpiarPantalla() {
-  #ifdef _WIN32
-      system("cls");
-  #else
-      system("clear");
-  #endif
+  system("cls");
 }
 
 void presioneTeclaParaContinuar() {
