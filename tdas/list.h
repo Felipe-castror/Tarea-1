@@ -3,6 +3,8 @@
 
 typedef struct List List;
 
+
+
 // Esta función crea una lista vacía y devuelve un puntero a la lista.
 List *list_create();
 

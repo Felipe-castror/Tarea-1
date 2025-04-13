@@ -59,11 +59,12 @@ void C_Ticket(List *clientes) //funcion para crear los tickets que tengan a los 
   //ahora se registra al cliente accediendo directamente al struct y en la posicion del id, para guardarlo directamente sin uso de un aux
   printf("Registrar nuevo cliente\n");
   printf("\nIngrese id :");
-  scanf("%d", &estructura ->id);
+  int ID;
+  scanf("%d", &ID);
 
   //condicion para ver si el id es valido, si no el programa para de registrar clientes
 
-  if  (estructura ->id < 1 || estructura -> id > 999999)
+  if  (ID < 1 || ID > 999999)
   {  
     printf("ERROR , NO SE INGRESO UN ID VALIDO\n");
     return;
@@ -71,7 +72,7 @@ void C_Ticket(List *clientes) //funcion para crear los tickets que tengan a los 
 
   //condicion para ver si ya se registro el ticket 
 
-  int id_busc = estructura -> id;
+  int id_busc = ID;
 
   Ticket *resultado = (Ticket *)list_find(clientes, compararID, &id_busc);
 
@@ -79,7 +80,9 @@ void C_Ticket(List *clientes) //funcion para crear los tickets que tengan a los 
 
   if (resultado == NULL) 
   {
+    estructura -> id = ID;
     printf("ID ingresado correctamente");
+
     
     //se hace getchar para limpiar el salto de linea para que el fgets no tenga problemas y no lea vacio
     getchar();
@@ -209,31 +212,33 @@ void mostrar_lista_clientes(List *clientes, List *clientes_B, List *clientes_M ,
   printf("clientes en espera: %d\n", Nclientes);
   printf("-------------------------------------\n");
 
-  Ticket *t;
-
+  Ticket *auxA;
   printf("\n--- PRIORIDAD ALTA ---\n");
-  t = (Ticket *)list_first(clientes_A);
-  while (t != NULL) 
+  Ticket *auxA = firstlist(clientes_A);  
+  while (auxA != NULL)
   {
-    printf("ID: %d | Problema: %s\n", t->id, t->problema);
-    t = (Ticket *)list_next(clientes_A);
+    printf("ID: %d | Problema: %s\n", auxA->id, auxA->problema);
+    auxA = nextlist(clientes_A);
   }
 
   
+  Ticket *auxM;
   printf("\n--- PRIORIDAD MEDIA ---\n");
-  t = (Ticket *)list_first(clientes_M);
-  while (t != NULL) 
+  Ticket *auxM = firstlist(clientes_M);  
+  while (auxM != NULL)
   {
-    printf("ID: %d | Problema: %s\n", t->id, t->problema);
-    t = (Ticket *)list_next(clientes_M);
+    printf("ID: %d | Problema: %s\n", auxM->id, auxM->problema);
+    auxM = nextlist(clientes_M);
   }
 
+  
+  Ticket *auxB;
   printf("\n--- PRIORIDAD BAJA ---\n");
-  t = (Ticket *)list_first(clientes_B);
-  while (t != NULL) 
+  Ticket *auxB = firstlist(clientes_B);  
+  while (auxB != NULL)
   {
-    printf("ID: %d | Problema: %s\n", t->id, t->problema);
-    t = (Ticket *)list_next(clientes_B);
+    printf("ID: %d | Problema: %s\n", auxB->id, auxB->problema);
+    auxB = nextlist(clientes_B);
   }
 
 
