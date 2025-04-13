@@ -32,19 +32,21 @@ void mostrarMenuPrincipal() {
   puts("6) Salir");
 }
 
-//funcion para comparar ids, si son iguales retorna 1 y si no -1
-int compararID(void *estructura , void *num)
+//funcion para buscar ids
+Ticket *buscarID(List*lista, int id)
 {
-  Ticket *t = (Ticket *)estructura;
-  int compID = *((int*)num);
+  if (lista == NULL || list_size(lista)== 0) return 0;
 
-  printf("%d" , &compID);
-
-  if (t->id == compID)return 1;
-
-  else return 0; 
-
+  Ticket * ticket = (Ticket*)list_first(lista);
+  while (ticket != NULL)
+  {
+    if (ticket -> id == id )return ticket;
+    ticket = (Ticket *)list_next(lista);
+  }
+  
+  return NULL;
 }
+
 
 void C_Ticket(List *clientes) //funcion para crear los tickets que tengan a los clientes.
 {
@@ -77,7 +79,7 @@ void C_Ticket(List *clientes) //funcion para crear los tickets que tengan a los 
 
 
 
-  if (list_find(clientes, compararID, &id_busc) == NULL) 
+  if (buscarID(clientes , ID) == NULL) 
   {
     estructura -> id = ID;
     printf("ID ingresado correctamente");
@@ -151,7 +153,7 @@ void prioridad_Ticket(List*clientes, List *clientes_B , List *clientes_M , List 
 
   //Se busca un puntero con la posicion del id si es que se encontro , en tal caso de que no se termina la funcion
 
-  if (list_find(clientes, compararID, &id_A_Buscar) == NULL) 
+  if (buscarID(clientes , id_A_Buscar) == NULL) 
   {
     printf("\nNO SE ENCONTRO TICKET CON EL ID.\n");
     return; 

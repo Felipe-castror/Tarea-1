@@ -30,8 +30,6 @@ void *list_popFront(List *L);
 // Esta función elimina el último elemento de la lista.
 void *list_popBack(List *L);
 
-//Esta funcion retorna el primer elemento que cumpla la condicion
-void *list_find(List *L, int (*cmp)(void *, void *), void *dato);
 
 // Esta función elimina el elemento actual de la lista.
 void *list_popCurrent(List *L);

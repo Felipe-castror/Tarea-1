@@ -157,18 +157,7 @@ void *list_popBack(List *L) {
   return data;
 }
 
-void *list_find(List *L, int (*cmp)(void *, void *), void *dato) {
-  void *elemento = list_first(L);
 
-  while (elemento != NULL) {
-      if (cmp(elemento, dato)) {
-          return elemento;  // se encontro el dato luego de comprobar 
-      }
-      elemento = list_next(L);
-  }
-
-  return NULL;  // no se encontró el dato, se retorna vacio
-}
 
 int list_size(List *L){
     return L->size;
