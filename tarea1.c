@@ -74,11 +74,10 @@ void C_Ticket(List *clientes) //funcion para crear los tickets que tengan a los 
 
   int id_busc = ID;
 
-  Ticket *resultado = (Ticket *)list_find(clientes, compararID, &id_busc);
 
 
 
-  if (resultado == NULL) 
+  if (list_find(clientes, compararID, &id_busc) == NULL) 
   {
     estructura -> id = ID;
     printf("ID ingresado correctamente");
@@ -119,7 +118,6 @@ void C_Ticket(List *clientes) //funcion para crear los tickets que tengan a los 
 
     list_pushBack(clientes, estructura);
   }
-
   else 
   {
     printf("TICKET NO VALIDO, ID YA FUE INGRESADO ANTES\n");
@@ -152,9 +150,8 @@ void prioridad_Ticket(List*clientes, List *clientes_B , List *clientes_M , List 
 
 
   //Se busca un puntero con la posicion del id si es que se encontro , en tal caso de que no se termina la funcion
-  estructura = (Ticket *)list_find(clientes, compararID, &id_A_Buscar);
 
-  if (estructura == NULL) 
+  if (list_find(clientes, compararID, &id_A_Buscar) == NULL) 
   {
     printf("\nNO SE ENCONTRO TICKET CON EL ID.\n");
     return; 
