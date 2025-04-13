@@ -35,7 +35,7 @@ void mostrarMenuPrincipal() {
 //funcion para buscar ids
 Ticket *buscarID(List*lista, int id)
 {
-  if (lista == NULL || list_size(lista)== 0) return 0;
+  if (lista == NULL || list_size(lista)== 0) return NULL;
 
   Ticket * ticket = (Ticket*)list_first(lista);
   while (ticket != NULL)
@@ -69,6 +69,7 @@ void C_Ticket(List *clientes) //funcion para crear los tickets que tengan a los 
   if  (ID < 1 || ID > 999999)
   {  
     printf("ERROR , NO SE INGRESO UN ID VALIDO\n");
+    free(estructura);
     return;
   }
 
@@ -79,52 +80,50 @@ void C_Ticket(List *clientes) //funcion para crear los tickets que tengan a los 
 
 
 
-  if (buscarID(clientes , ID) == NULL) 
-  {
-    estructura -> id = ID;
-    printf("ID ingresado correctamente");
-
-    
-    //se hace getchar para limpiar el salto de linea para que el fgets no tenga problemas y no lea vacio
-    getchar();
-
-    printf("\nExplique su problema(maximo 200 palabras) :");
-
-    //Se ocupa fgets para leer la linea completa o en este caso el problema
-    fgets(estructura -> problema ,MAX_P,stdin);
-    
-    //se elimina el salto de de linea o vacio
-    estructura->problema[strcspn(estructura->problema,"\n")] = 0;
-
-    //la prioridad parte en bajo, luego se le hace un cambio en otra funcion
-    estructura ->prioridad = 1;
-
-    /* ocupo la libreria time.h para poder registrar mas eficientemente el tiempo, asi el usuario no tiene que registrar su tiempo
-    si no que la funcion lo registra a traves del sistema operativo.
-    */
-    estructura -> tiempo = time(NULL);
-
-    // ahora ocupo un struct predefinido de la libreria time.h para manejar el tiempo(fecha, dia , hora) para sacar el tiempo del sistema operativo del cliente
-    struct tm*tm_info;
-    tm_info = localtime(&estructura->tiempo);
-    
-    /*ahora se utiliza una variable aux de tipo char para poder hacer el traspaso de la hora para poder mostrarla,
-    luego utilizo una funcion de la libreria time.h para hacer el traspaso de la hora a texto, con el formato dia,mes
-    año  hora y minutos, y al final se muestra la hora.
-    */
-
-    char aux_hora[50];
-    strftime(aux_hora, sizeof(aux_hora), "%d/%m/%Y %H:%M",tm_info);
-    
-    printf("Fecha y hora : %s\n",aux_hora);
-
-    list_pushBack(clientes, estructura);
-  }
-  else 
+  if (buscarID(clientes , ID) != NULL) 
   {
     printf("TICKET NO VALIDO, ID YA FUE INGRESADO ANTES\n");
+    free(estructura); // Libera la memoria si no se va a usar
     return;
   }
+  estructura -> id = ID;
+  printf("ID ingresado correctamente");
+
+    
+  //se hace getchar para limpiar el salto de linea para que el fgets no tenga problemas y no lea vacio
+  getchar();
+
+  printf("\nExplique su problema(maximo 200 palabras) :");
+
+  //Se ocupa fgets para leer la linea completa o en este caso el problema
+  fgets(estructura -> problema ,MAX_P,stdin);
+    
+  //se elimina el salto de de linea o vacio
+  estructura->problema[strcspn(estructura->problema,"\n")] = 0;
+
+  //la prioridad parte en bajo, luego se le hace un cambio en otra funcion
+  estructura ->prioridad = 1;
+
+  /* ocupo la libreria time.h para poder registrar mas eficientemente el tiempo, asi el usuario no tiene que registrar su tiempo
+  si no que la funcion lo registra a traves del sistema operativo.
+  */
+  estructura -> tiempo = time(NULL);
+
+  // ahora ocupo un struct predefinido de la libreria time.h para manejar el tiempo(fecha, dia , hora) para sacar el tiempo del sistema operativo del cliente
+  struct tm*tm_info;
+  tm_info = localtime(&estructura->tiempo);
+    
+  /*ahora se utiliza una variable aux de tipo char para poder hacer el traspaso de la hora para poder mostrarla,
+  luego utilizo una funcion de la libreria time.h para hacer el traspaso de la hora a texto, con el formato dia,mes
+  año  hora y minutos, y al final se muestra la hora.
+  */
+
+  char aux_hora[50];
+  strftime(aux_hora, sizeof(aux_hora), "%d/%m/%Y %H:%M",tm_info);
+    
+  printf("Fecha y hora : %s\n",aux_hora);
+
+  list_pushBack(clientes, estructura);
 }
 
 //funcion para ordenar los tickets segun su hora de ingreso
@@ -152,8 +151,9 @@ void prioridad_Ticket(List*clientes, List *clientes_B , List *clientes_M , List 
 
 
   //Se busca un puntero con la posicion del id si es que se encontro , en tal caso de que no se termina la funcion
+  Ticket *estructura = buscarID(clientes, id_A_Buscar);
 
-  if (buscarID(clientes , id_A_Buscar) == NULL) 
+  if (estructura == NULL) 
   {
     printf("\nNO SE ENCONTRO TICKET CON EL ID.\n");
     return; 
