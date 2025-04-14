@@ -147,7 +147,6 @@ void prioridad_Ticket(List*clientes, List *clientes_B , List *clientes_M , List 
   //creo dos variables, para ver el id a modificar, y para ver que prioridad es.
   int id_A_Buscar , N_prioridad;
   Ticket *estructura = NULL;
-  estructura = (Ticket*)malloc(sizeof(Ticket));
 
   printf("Inserte ID de su ticket para modificar su prioridad :");
   scanf("%d", &id_A_Buscar);
@@ -216,7 +215,7 @@ void mostrar_lista_clientes(List *clientes, List *clientes_B, List *clientes_M ,
 
   Ticket *auxA = NULL;
   printf("\n--- PRIORIDAD ALTA ---\n");
-  Ticket *auxA = list_first(clientes_A);  
+  auxA = list_first(clientes_A);  
   while (auxA != NULL)
   {
     printf("ID: %d | Problema: %s\n", auxA->id, auxA->problema);
@@ -226,7 +225,7 @@ void mostrar_lista_clientes(List *clientes, List *clientes_B, List *clientes_M ,
   
   Ticket *auxM = NULL;
   printf("\n--- PRIORIDAD MEDIA ---\n");
-  Ticket *auxM = list_first(clientes_M);  
+  auxM = list_first(clientes_M);  
   while (auxM != NULL)
   {
     printf("ID: %d | Problema: %s\n", auxM->id, auxM->problema);
@@ -236,7 +235,7 @@ void mostrar_lista_clientes(List *clientes, List *clientes_B, List *clientes_M ,
   
   Ticket *auxB = NULL;
   printf("\n--- PRIORIDAD BAJA ---\n");
-  Ticket *auxB = list_first(clientes_B);  
+  auxB = list_first(clientes_B);  
   while (auxB != NULL)
   {
     printf("ID: %d | Problema: %s\n", auxB->id, auxB->problema);
