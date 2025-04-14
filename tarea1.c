@@ -171,9 +171,6 @@ void prioridad_Ticket(List*clientes, List *clientes_B , List *clientes_M , List 
   //se hace cambio la prioridad del ticket una vez ya todo fue confirmado
   estructura -> prioridad = N_prioridad;
 
-  list_clean(clientes_B);
-  list_clean(clientes_M);
-  list_clean(clientes_A);
 
   // ahora se ingresa el ticket en la lista correspondiente, segun su prioridad y hora
   switch (estructura->prioridad) 
