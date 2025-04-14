@@ -26,9 +26,9 @@ void mostrarMenuPrincipal() {
 
   puts("1) Registrar id del cliente");
   puts("2) Asignar prioridad a cliente");
-  puts("3) Mostrar lista de espera");
+  puts("3) Mostrar clientes por prioridad y hora");
   puts("4) Atender al siguiente cliente");
-  puts("5) Mostrar clientes por prioridad");
+  puts("5) buscar cliente por id");
   puts("6) Salir");
 }
 
@@ -394,7 +394,7 @@ int main() {
 
   // Liberar recursos, si es necesario
   list_clean(clientes);
-  
+
   list_clean(clientes_B);
   list_clean(clientes_M);
   list_clean(clientes_A);
