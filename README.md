@@ -35,7 +35,7 @@ Bienvenido al sistema de soporte técnico
 2. cambiar prioridad de ticket
 3. mostrar los clientes segun su prioridad y hora
 4. atender al sig cliente
-5. mostrar clientes por prioridad
+5. buscar cliente por id
 6. salir
 
 Ingrese una opción: 1
@@ -43,3 +43,4 @@ id : 12345
 Problema: Pantalla azul
 Prioridad (Alta, Media, Baja): Alta
 Cliente registrado con éxito.
+(dependiendo de la opcion se va a seguir mostrando otra info)
