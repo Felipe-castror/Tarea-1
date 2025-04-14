@@ -133,8 +133,8 @@ int compararPorHora(void *data1, void *data2) {
   Ticket *ticket1 = (Ticket *)data1;
   Ticket *ticket2 = (Ticket *)data2;
 
-  if (ticket1->tiempo < ticket2->tiempo) return 1;
-  if (ticket1->tiempo > ticket2->tiempo) return -1;
+  if (ticket1->tiempo < ticket2->tiempo) return -1;
+  if (ticket1->tiempo > ticket2->tiempo) return 1;
 
   return 0; 
 }
@@ -282,7 +282,9 @@ void procesar_ticket(List *clientes ,List *clientes_B , List *clientes_M , List 
       strftime(hora_EA, sizeof(hora_EA), "%d/%m/%Y %H:%M", tm_info1);
       printf("ID: %d | Problema: %s | Hora: %s Fue procesado.\n", auxA->id, auxA->problema, hora_EA);
       list_popFront(clientes_A);
+      list_remove(clientes , auxA);
       return;
+
       
     }
 
@@ -295,6 +297,7 @@ void procesar_ticket(List *clientes ,List *clientes_B , List *clientes_M , List 
       strftime(hora_EM, sizeof(hora_EM), "%d/%m/%Y %H:%M", tm_info2);
       printf("ID: %d | Problema: %s | Hora: %s Fue procesado.\n", auxM->id, auxM->problema, hora_EM);
       list_popFront(clientes_M);
+      list_remove(clientes , auxM);
       return;
     }
 
@@ -307,6 +310,7 @@ void procesar_ticket(List *clientes ,List *clientes_B , List *clientes_M , List 
       strftime(hora_EB, sizeof(hora_EB), "%d/%m/%Y %H:%M", tm_info3);
       printf("ID: %d | Problema: %s | Hora: %s Fue procesado.\n", auxB->id, auxB->problema, hora_EB);
       list_popFront(clientes_B);
+      list_remove(clientes , auxB);
       return;
       
     }
