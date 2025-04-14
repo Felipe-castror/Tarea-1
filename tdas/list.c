@@ -203,31 +203,4 @@ void list_clean(List *L) {
   L->size = 0;
 }
 
-void list_remove(List *list, void *data) {
-  if (list == NULL || list->head == NULL) {
-      return; // Lista vacía o no válida, no hay nada que eliminar
-  }
 
-  // Caso especial: el nodo a eliminar es el primero (head)
-  if (list->head->data == data) {
-      Node *to_delete = list->head;
-      list->head = list->head->next; // Mover el head al siguiente nodo
-      free(to_delete);               // Liberar memoria del nodo eliminado
-      list->size--;                  // Reducir el tamaño de la lista
-      return;
-  }
-
-  // Recorrer la lista para encontrar el nodo
-  Node *current = list->head;
-  while (current->next != NULL) {
-      if (current->next->data == data) {
-          // El siguiente nodo es el que queremos eliminar
-          Node *to_delete = current->next;
-          current->next = current->next->next; // Saltar el nodo eliminado
-          free(to_delete);                     // Liberar memoria del nodo eliminado
-          list->size--;                        // Reducir el tamaño de la lista
-          return;
-      }
-      current = current->next; // Avanzar al siguiente nodo
-  }
-}

@@ -43,6 +43,4 @@ void list_sortedInsert(List *L, void *data,
 
 int list_size(List* L);
 
-void list_remove(List *list, void *data)
-
 #endif
