@@ -214,7 +214,10 @@ void mostrar_lista_clientes(List *clientes, List *clientes_B, List *clientes_M ,
   auxA = list_first(clientes_A);  
   while (auxA != NULL)
   {
-    printf("ID: %d | Problema: %s\n", auxA->id, auxA->problema);
+    char hora_EA[50];
+    struct tm *tm_info1 = localtime(&auxA->tiempo);
+    strftime(hora_EA, sizeof(hora_EA), "%d/%m/%Y %H:%M", tm_info1);
+    printf("ID: %d | Problema: %s | Hora: %s\n", auxA->id, auxA->problema, hora_EA);
     auxA = list_next(clientes_A);
   }
 
@@ -224,7 +227,10 @@ void mostrar_lista_clientes(List *clientes, List *clientes_B, List *clientes_M ,
   auxM = list_first(clientes_M);  
   while (auxM != NULL)
   {
-    printf("ID: %d | Problema: %s\n", auxM->id, auxM->problema);
+    char hora_EM[50];
+    struct tm *tm_info2 = localtime(&auxM->tiempo);
+    strftime(hora_EM, sizeof(hora_EM), "%d/%m/%Y %H:%M", tm_info2);
+    printf("ID: %d | Problema: %s | Hora: %s\n", auxM->id, auxM->problema, hora_EM);
     auxM = list_next(clientes_M);
   }
 
@@ -234,7 +240,10 @@ void mostrar_lista_clientes(List *clientes, List *clientes_B, List *clientes_M ,
   auxB = list_first(clientes_B);  
   while (auxB != NULL)
   {
-    printf("ID: %d | Problema: %s\n", auxB->id, auxB->problema);
+    char hora_EB[50];
+    struct tm *tm_info3 = localtime(&auxB->tiempo);
+    strftime(hora_EB, sizeof(hora_EB), "%d/%m/%Y %H:%M", tm_info3);
+    printf("ID: %d | Problema: %s | Hora: %s\n", auxB->id, auxB->problema, hora_EB);
     auxB = list_next(clientes_B);
   }
 
