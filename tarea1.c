@@ -52,7 +52,8 @@ Ticket *buscarID(List*lista, int id)
 void C_Ticket(List *clientes) //funcion para crear los tickets que tengan a los clientes.
 {
   //se crea el struct de tickets y se hace un malloc para la memoria
-  Ticket *estructura = (Ticket*)malloc(sizeof(Ticket));
+  Ticket *estructura = NULL;
+  estructura = (Ticket*)malloc(sizeof(Ticket));
   //se verifica si es que el estruct esta vacio, si es que es NULL esta mal y se termina
   if (estructura == NULL)
   {
@@ -146,6 +147,7 @@ void prioridad_Ticket(List*clientes, List *clientes_B , List *clientes_M , List 
   //creo dos variables, para ver el id a modificar, y para ver que prioridad es.
   int id_A_Buscar , N_prioridad;
   Ticket *estructura = NULL;
+  estructura = (Ticket*)malloc(sizeof(Ticket));
 
   printf("Inserte ID de su ticket para modificar su prioridad :");
   scanf("%d", &id_A_Buscar);
@@ -212,7 +214,7 @@ void mostrar_lista_clientes(List *clientes, List *clientes_B, List *clientes_M ,
   printf("clientes en espera: %d\n", Nclientes);
   printf("-------------------------------------\n");
 
-  Ticket *auxA;
+  Ticket *auxA = NULL;
   printf("\n--- PRIORIDAD ALTA ---\n");
   Ticket *auxA = list_first(clientes_A);  
   while (auxA != NULL)
@@ -222,7 +224,7 @@ void mostrar_lista_clientes(List *clientes, List *clientes_B, List *clientes_M ,
   }
 
   
-  Ticket *auxM;
+  Ticket *auxM = NULL;
   printf("\n--- PRIORIDAD MEDIA ---\n");
   Ticket *auxM = list_first(clientes_M);  
   while (auxM != NULL)
@@ -232,7 +234,7 @@ void mostrar_lista_clientes(List *clientes, List *clientes_B, List *clientes_M ,
   }
 
   
-  Ticket *auxB;
+  Ticket *auxB = NULL;
   printf("\n--- PRIORIDAD BAJA ---\n");
   Ticket *auxB = list_first(clientes_B);  
   while (auxB != NULL)
