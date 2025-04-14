@@ -145,7 +145,7 @@ void prioridad_Ticket(List*clientes, List *clientes_B , List *clientes_M , List 
 {
   //creo dos variables, para ver el id a modificar, y para ver que prioridad es.
   int id_A_Buscar , N_prioridad;
-  Ticket *estructura;
+  Ticket *estructura = NULL;
 
   printf("Inserte ID de su ticket para modificar su prioridad :");
   scanf("%d", &id_A_Buscar);
