@@ -171,9 +171,9 @@ void prioridad_Ticket(List*clientes, List *clientes_B , List *clientes_M , List 
   //se hace cambio la prioridad del ticket una vez ya todo fue confirmado
   estructura -> prioridad = N_prioridad;
 
-  list_remove(clientes_B, estructura);
-  list_remove(clientes_M, estructura);
-  list_remove(clientes_A, estructura);
+  list_clean(clientes_B);
+  list_clean(clientes_M);
+  list_clean(clientes_A);
 
   // ahora se ingresa el ticket en la lista correspondiente, segun su prioridad y hora
   switch (estructura->prioridad) 
@@ -214,31 +214,31 @@ void mostrar_lista_clientes(List *clientes, List *clientes_B, List *clientes_M ,
 
   Ticket *auxA;
   printf("\n--- PRIORIDAD ALTA ---\n");
-  Ticket *auxA = firstlist(clientes_A);  
+  Ticket *auxA = list_first(clientes_A);  
   while (auxA != NULL)
   {
     printf("ID: %d | Problema: %s\n", auxA->id, auxA->problema);
-    auxA = nextlist(clientes_A);
+    auxA = list_next(clientes_A);
   }
 
   
   Ticket *auxM;
   printf("\n--- PRIORIDAD MEDIA ---\n");
-  Ticket *auxM = firstlist(clientes_M);  
+  Ticket *auxM = list_first(clientes_M);  
   while (auxM != NULL)
   {
     printf("ID: %d | Problema: %s\n", auxM->id, auxM->problema);
-    auxM = nextlist(clientes_M);
+    auxM = list_next(clientes_M);
   }
 
   
   Ticket *auxB;
   printf("\n--- PRIORIDAD BAJA ---\n");
-  Ticket *auxB = firstlist(clientes_B);  
+  Ticket *auxB = list_first(clientes_B);  
   while (auxB != NULL)
   {
     printf("ID: %d | Problema: %s\n", auxB->id, auxB->problema);
-    auxB = nextlist(clientes_B);
+    auxB = list_next(clientes_B);
   }
 
 
