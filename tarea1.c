@@ -81,11 +81,11 @@ void C_Ticket(List *clientes) //funcion para crear los tickets que tengan a los 
 
 
 
-
+//se busca el ticket, si se encuentra se devuelve un ticket, si no null, si no es null es por que se encontro, por lo tanto hayq ue borrar la memoria que se le reservo
   if (buscarID(clientes , ID) != NULL) 
   {
     printf("TICKET NO VALIDO, ID YA FUE INGRESADO ANTES\n");
-    free(estructura); // Libera la memoria si no se va a usar
+    free(estructura);
     return;
   }
   estructura -> id = ID;
@@ -133,8 +133,8 @@ int compararPorHora(void *data1, void *data2) {
   Ticket *ticket1 = (Ticket *)data1;
   Ticket *ticket2 = (Ticket *)data2;
 
-  if (ticket1->tiempo < ticket2->tiempo) return -1;
-  if (ticket1->tiempo > ticket2->tiempo) return 1;
+  if (ticket1->tiempo < ticket2->tiempo) return 1;
+  if (ticket1->tiempo > ticket2->tiempo) return -1;
 
   return 0; 
 }
@@ -170,6 +170,12 @@ void prioridad_Ticket(List*clientes, List *clientes_B , List *clientes_M , List 
   }
   //se hace cambio la prioridad del ticket una vez ya todo fue confirmado
   estructura -> prioridad = N_prioridad;
+
+  //se hace un list_remove(estructura agregada por mi en list.c y .h) para eliminar cualquier duplicado de este ticket, aun que se modifique en una siguiente funcion.
+
+  list_remove(clientes_B, estructura);
+  list_remove(clientes_M, estructura);
+  list_remove(clientes_A, estructura);
 
 
   // ahora se ingresa el ticket en la lista correspondiente, segun su prioridad y hora
@@ -209,6 +215,11 @@ void mostrar_lista_clientes(List *clientes, List *clientes_B, List *clientes_M ,
   printf("clientes en espera: %d\n", Nclientes);
   printf("-------------------------------------\n");
 
+  /*ahora se le hace un aux a cada prioridad con su ticket, asi se recorre la lista y se le asigna el valor de ticket al 
+  resultado del list_first, asi con la estructura apropiada se puede ingresar al ticket facilmente, asi haciendo posible el
+  extraer los datos de la estructura
+  */
+
   Ticket *auxA = NULL;
   printf("\n--- PRIORIDAD ALTA ---\n");
   auxA = list_first(clientes_A);  
@@ -246,12 +257,98 @@ void mostrar_lista_clientes(List *clientes, List *clientes_B, List *clientes_M ,
     printf("ID: %d | Problema: %s | Hora: %s\n", auxB->id, auxB->problema, hora_EB);
     auxB = list_next(clientes_B);
   }
-
-
-  
-
-  
 }
+
+void procesar_ticket(List *clientes ,List *clientes_B , List *clientes_M , List *clientes_A)
+{
+
+  printf("procesando tickets pendientes :");
+
+  if (list_size(clientes) == 0)
+  {
+    printf("NO HAY TICKETS PENDIENTES\n");
+    return;
+
+  }
+
+  else
+  {
+    if (list_size(clientes_A) != 0)
+    {
+      Ticket *auxA = NULL;
+      auxA = list_first(clientes_A);
+      char hora_EA[50];
+      struct tm *tm_info1 = localtime(&auxA->tiempo);
+      strftime(hora_EA, sizeof(hora_EA), "%d/%m/%Y %H:%M", tm_info1);
+      printf("ID: %d | Problema: %s | Hora: %s Fue procesado.\n", auxA->id, auxA->problema, hora_EA);
+      list_popFront(clientes_A);
+      return;
+      
+    }
+
+    if (list_size(clientes_M) != 0)
+    {
+      Ticket *auxM = NULL;
+      auxM = list_first(clientes_M);
+      char hora_EM[50];
+      struct tm *tm_info2 = localtime(&auxM->tiempo);
+      strftime(hora_EM, sizeof(hora_EM), "%d/%m/%Y %H:%M", tm_info2);
+      printf("ID: %d | Problema: %s | Hora: %s Fue procesado.\n", auxM->id, auxM->problema, hora_EM);
+      list_popFront(clientes_M);
+      return;
+    }
+
+    if (list_size(clientes_B) != 0)
+    {
+      Ticket *auxB = NULL;
+      auxB = list_first(clientes_B);
+      char hora_EB[50];
+      struct tm *tm_info3 = localtime(&auxB->tiempo);
+      strftime(hora_EB, sizeof(hora_EB), "%d/%m/%Y %H:%M", tm_info3);
+      printf("ID: %d | Problema: %s | Hora: %s Fue procesado.\n", auxB->id, auxB->problema, hora_EB);
+      list_popFront(clientes_B);
+      return;
+      
+    }
+
+  }
+  
+
+
+
+}
+
+
+//funcion para buscar tickets, se reutilizan codigos de otras funciones para buscarlo.
+void buscar_ticket(List *clientes)
+{
+  if (list_size(clientes) == 0)
+  {
+    printf("ERROR , NO HAY CLIENTES REGISTRADOS\n");
+    return;
+  }
+
+  else
+  {
+    int id;
+    scanf("%d", &id);
+
+
+    Ticket *T_buscado = buscarID(clientes, id);
+
+    char hora[50];
+    struct tm *tm_info = localtime(&T_buscado->tiempo);
+    strftime(hora, sizeof(hora), "%d/%m/%Y %H:%M", tm_info);
+    printf("ID: %d | Problema: %s | Hora: %s Fue procesado.\n", T_buscado->id, T_buscado->problema, hora);
+
+
+
+  }
+
+}
+
+  
+  
 
 int main() {
   char opcion;
@@ -280,10 +377,10 @@ int main() {
       mostrar_lista_clientes(clientes, clientes_B , clientes_M , clientes_A);
       break;
     case '4':
-      // Lógica para atender al siguiente clientes
+      procesar_ticket(clientes ,clientes_B , clientes_M , clientes_A);
       break;
     case '5':
-      // Lógica para mostrar clientes por prioridad
+      buscar_ticket(clientes);
       break;
     case '6':
       puts("Saliendo del sistema de soporte tecnico...");
@@ -297,6 +394,7 @@ int main() {
 
   // Liberar recursos, si es necesario
   list_clean(clientes);
+  
   list_clean(clientes_B);
   list_clean(clientes_M);
   list_clean(clientes_A);
