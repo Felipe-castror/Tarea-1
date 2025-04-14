@@ -131,7 +131,7 @@ void C_Ticket(List *clientes) //funcion para crear los tickets que tengan a los 
 int compararPorHora(void *data1, void *data2) {
   Ticket *ticket1 = (Ticket *)data1;
   Ticket *ticket2 = (Ticket *)data2;
-
+  printf("Insertando ticket con tiempo %ld\n", ((Ticket *)data1)->tiempo);
   if (ticket1->tiempo < ticket2->tiempo) return -1;
   if (ticket1->tiempo > ticket2->tiempo) return 1;
 
